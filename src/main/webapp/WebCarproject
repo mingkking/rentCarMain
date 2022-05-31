@@ -1,0 +1,79 @@
+10. 시퀀스
+create sequence car_seq
+    start with 1
+    increment by 1
+    minvalue 1
+    maxvalue 10000
+    nocycle;
+
+20. 테이블 생성    
+create table rentcar(
+    no number primary key,
+    carname varchar2(30),
+    category number,
+    price number,
+    usepeople number,
+    company varchar2(30),
+    img varchar2(50),
+    info varchar2(200)
+);
+
+25. 데이터 입력 기준
+	- 자동차 3개사(볼보, 현대, 기아)
+	- 현대와 볼보는 대형, 중형, 소형으로 입력
+	- 기아는 중형만 입력
+
+30. VO(DTO) 작성: kr.co.ezen.dao.RentCarDAO.java(setter + getter)
+
+40. DAO 작성: kr.co.ezen.vo.RentCarVO.java(DataBase 연동(Connection pool))
+
+50. header: top.jsp 작성(kiaLogo.jpg, 회사명, 로그인명 등)
+
+55. footer: bottom.jsp 작성(회사에 대한 정보 등)
+
+60. center: center.jsp 작성(기아 자동차에서 그림 이미지 가져오기)
+
+65. 통합 : rentCarMain.jsp 작성 include(top.jsp + bottom.jsp + center.jsp)
+
+70. 최신 자동차 3대 가져오기: carReserveMain.jsp
+
+75. 대중소 자동차 분류옵션과 검색버튼 만들기
+	- carCategoryList.jsp(대중소 차량검색), 전체검색(CarAllList.jsp)
+77. 차량 상세 보기: carReserveInfo.jsp
+	- 자동차 번호 받기
+	- DAO에서 객체 생성
+	- 생성된 객체로 DAO에서 처리
+	- 반환된 정보 VO에 저장
+	- 저장된 VO를 읽어서 화면 출력
+	
+80. 예약 정보 화면: carOptionSelect.jsp
+	- 대여일자: 과거의 날짜로 예약 불가능
+	- 대여기간: 1일, 2일, 7일, 14일, .... 1달, 2달, 리스: 12개월
+	- 보험적용: 1일 1만원, 비적용
+	- 와이파이: 1일 2만원, 비적용
+	- 베이비시트: 1일 3만원, 비적용
+	- 네비게이션: 1일 5천원, 비적용 
+	
+
+	
+100. 시퀀스 + 테이블 생성
+create sequence carReserve_seq
+	start with 1
+	increment by 1
+	minvalue 1
+	maxvalue 10000
+	nocache
+	nocycle;
+	
+create table carReserve(
+	carRNo number primary key,
+	no number not null,
+	img varchar2(50) not null,
+	cnt number not null,
+	day number not null,
+	dday date not null,
+	insurance number not null,
+	wifi number not null,
+	babySeat number not null,
+	navi number not null
+);
